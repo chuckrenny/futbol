@@ -53,6 +53,12 @@
 - Runner
 - Spec Harness
 
+**Open Coverage Report:** 
+To Display Test Coverage
+- gem install simplecov
+- bundle install
+- Terminal Input: open coverage/index.html
+
 **Additional Documents:**  
 [Futbol Architecture](https://miro.com/app/board/uXjVMxAWfME=/#tpicker-content)  
 [Google Doc Brainstorm](https://docs.google.com/document/d/1gS0AAn056CZI1Cn7MSnpMDbgAODSe6wiQGfNmsCnGRE/edit)  
