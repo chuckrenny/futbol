@@ -1,7 +1,6 @@
 require 'csv'
 
 module DataParsable
-
   attr_reader :games, :teams, :game_teams
 
   def initialize(files)
