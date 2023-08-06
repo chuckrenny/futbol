@@ -225,9 +225,5 @@ RSpec.describe StatTracker do
       expect(stat_tracker.fewest_tackles("20132014")).to eq "Atlanta United"
       expect(stat_tracker.fewest_tackles("20142015")).to eq "Orlando City SC"
     end
-
-    # it "#best_season" do
-    #   expect(stat_tracker.best_season("6")).to eq "20132014"
-    # end
   end
 end

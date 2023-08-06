@@ -82,14 +82,10 @@ module SeasonStatable
   end
 
   def most_tackles(season)
-    team_with_most_tackles = total_tackles_by_team_id(season).values.max
-    most_tackles = total_tackles_by_team_id(season).key(team_with_most_tackles)
-    team_list[most_tackles]
+    team_list[total_tackles_by_team_id(season).key(total_tackles_by_team_id(season).values.max)]
   end
-
+  
   def fewest_tackles(season)
-    team_with_fewest_tackles = total_tackles_by_team_id(season).values.min
-    fewest_tackles = total_tackles_by_team_id(season).key(team_with_fewest_tackles)
-    team_list[fewest_tackles]
+    team_list[total_tackles_by_team_id(season).key(total_tackles_by_team_id(season).values.min)]
   end
 end
