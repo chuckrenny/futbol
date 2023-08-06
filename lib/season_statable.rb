@@ -34,43 +34,23 @@ module SeasonStatable
     min_win_percentage = coach_sucess_percentage(season).values.min
     coach_sucess_percentage(season).key(min_win_percentage)
   end
-  
+
+  def avg_goals_made(season)
+    goals = @game_teams.each_with_object(Hash.new([0,0])) { |game, hash|
+        if all_season_game_id(season).include?(game.game_id)
+            hash[game.team_id] = [game.goals + hash[game.team_id][0], game.shots + hash[game.team_id][1]]
+        end
+    }.transform_values { |value| (value[0] / value[1].to_f).round(4) }
+  end
+
   def most_accurate_team(season)
-    all_season_game_id = @games.map do |game|
-      game.game_id if game.season == season
-    end.compact
-
-    team_id_goals_shots = @game_teams.each_with_object(Hash.new([0,0])) do |game, hash|
-      if all_season_game_id.include?(game.game_id)
-        hash[game.team_id] = [game.goals + hash[game.team_id][0], game.shots + hash[game.team_id][1]]
-      end
-    end
-    
-    avg_goals_made = team_id_goals_shots.transform_values do |value|
-      (value[0] / value[1].to_f).round(4)
-    end
-
-    team_name = avg_goals_made.key(avg_goals_made.values.max)
-    team_list[team_name]
+      avg_goals = avg_goals_made(season)
+      team_list[avg_goals.key(avg_goals.values.max)]
   end
 
   def least_accurate_team(season)
-    all_season_game_id = @games.map do |game|
-      game.game_id if game.season == season
-    end.compact
-    
-    team_id_goals_shots = @game_teams.each_with_object(Hash.new([0,0])) do |game, hash|
-      if all_season_game_id.include?(game.game_id)
-        hash[game.team_id] = [game.goals + hash[game.team_id][0], game.shots + hash[game.team_id][1]]
-      end
-    end
-    
-    avg_goals_made = team_id_goals_shots.transform_values do |value|
-      (value[0] / value[1].to_f).round(4)
-    end
-    
-    team_name = avg_goals_made.key(avg_goals_made.values.min)
-    team_list[team_name]
+      avg_goals = avg_goals_made(season)
+      team_list[avg_goals.key(avg_goals.values.min)]
   end
 
   def total_tackles_by_team_id(season)
