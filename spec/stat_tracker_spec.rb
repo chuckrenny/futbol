@@ -174,6 +174,18 @@ RSpec.describe StatTracker do
   end
 
   describe "Season Statistics" do
+    it "#all_season_game_id" do
+      expect(stat_tracker.all_season_game_id("20132014")).to be_an(Array)
+    end
+    
+    it "#wins_per_coach" do
+      expect(stat_tracker.wins_per_coach("20132014")).to be_a(Hash)
+    end
+
+    it "#coach_sucess_percentage(season)" do
+     expect(stat_tracker.coach_sucess_percentage("20132014")).to be_a(Hash)
+    end
+
     it "#winningest_coach" do
       expect(stat_tracker.winningest_coach("20132014")).to eq("Claude Julien")
     end
@@ -213,6 +225,5 @@ RSpec.describe StatTracker do
       expect(stat_tracker.fewest_tackles("20132014")).to eq "Atlanta United"
       expect(stat_tracker.fewest_tackles("20142015")).to eq "Orlando City SC"
     end
-
   end
 end
