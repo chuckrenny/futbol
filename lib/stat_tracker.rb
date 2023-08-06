@@ -12,24 +12,6 @@ include DataParsable
 include GameStatable
 include LeagueStatable
 include SeasonStatable
-  
-  # def win_list_per_team(team_id)
-  #   win_list = []
-  #   @game_teams.each do |game|
-  #     if team_id == team_id && game.result == "WIN"
-  #       win_list << game.game_id
-  #     end
-  #   end
-  #   win_list
-  # end
-
-  # def best_season(team_id)
-  #   win_list_per_team(team_id).each do |game_id|
-  #     @games.each do |game| 
-
-  #     end
-  #   end
-  # end
 
   def self.from_csv(files)
     StatTracker.new(files)
