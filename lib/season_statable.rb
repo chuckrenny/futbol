@@ -19,20 +19,20 @@ module SeasonStatable
     coach_wins
   end
 
-  def winningest_coach(season)
-    coach_win_percentage = wins_per_coach(season).transform_values do |value| 
+  def coach_sucess_percentage(season)
+    wins_per_coach(season).transform_values do |value| 
       (value[0] / value[1].to_f).round(4)
     end
-    max_win_percentage = coach_win_percentage.values.max
-    coach_win_percentage.key(max_win_percentage)
+  end
+
+  def winningest_coach(season)
+    max_win_percentage = coach_sucess_percentage(season).values.max
+    coach_sucess_percentage(season).key(max_win_percentage)
   end
   
   def worst_coach(season)
-    coach_loss_percentage = wins_per_coach(season).transform_values do |value| 
-      (value[0] / value[1].to_f).round(4)
-    end
-    min_win_percentage = coach_loss_percentage.values.min
-    coach_loss_percentage.key(min_win_percentage)
+    min_win_percentage = coach_sucess_percentage(season).values.min
+    coach_sucess_percentage(season).key(min_win_percentage)
   end
   
   def most_accurate_team(season)
