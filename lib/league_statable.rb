@@ -9,12 +9,12 @@ module LeagueStatable
   end
   
   def total_goals_made_per_team
-     @game_teams.each_with_object(Hash.new(0.0)) { |game, hash| hash[game.team_id] += game.goals.to_i}
+     @game_teams.each_with_object(Hash.new(0.0)) { |game, goals_made| goals_made[game.team_id] += game.goals}
    
   end
 
   def games_played_per_team
-      @game_teams.each_with_object(Hash.new(0.0)) { |game, goals_made| goals_made[game.team_id] += 1}
+      @game_teams.each_with_object(Hash.new(0.0)) { |game, games_played| games_played[game.team_id] += 1}
   end
   
   def average_goals_per_team_id
