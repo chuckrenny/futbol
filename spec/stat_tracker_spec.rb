@@ -42,6 +42,10 @@ RSpec.describe StatTracker do
       expect(stat_tracker.total_games).to eq(7441)
     end
 
+    it "calculate_average_by_total_games" do
+      expect(stat_tracker.calculate_average_by_total_games(stat_tracker.total_games)).to eq(1.0)
+    end
+
     it "#percentage_home_wins" do
       expect(stat_tracker.percentage_home_wins).to be_a(Float)
       expect(stat_tracker.percentage_home_wins).to eq(0.44)
@@ -263,10 +267,17 @@ RSpec.describe StatTracker do
       expect(stat_tracker.percentage_games_won_by_team_id).to be_a (Hash)
     end
 
-    it "#average_win_percentage" do 
-    require 'pry';binding.pry
+    xit "#average_win_percentage" do 
       expect(stat_tracker.average_win_percentage("1")).to be_a(Float)
       expect(stat_tracker.average_win_percentage("1")).to eq(0.36)
+    end
+
+    xit "#most_goals_scored" do 
+      expect(stat_tracker.most_goals_scored).to be_a(Integer)
+    end
+
+    xit "#fewest_goals_scored" do 
+      expect(stat_tracker.fewest_goals_scored).to be_a(Integer)
     end
 
     xit "#biggest_team_blowout" do
