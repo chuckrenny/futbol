@@ -245,21 +245,36 @@ RSpec.describe StatTracker do
 
   describe "Team Statistics" do
     it "#team_info" do
-      team_info = {
-        team_id: "1",
-        franchise_id: "23",
-        team_name: "Atlanta United",
-        abbreviation: "ATL",
-        link: "/api/v1/teams/1"
-      }  
+      expected = {
+        "team_id" => "18",
+        "franchise_id" => "34",
+        "team_name" => "Minnesota United FC",
+        "abbreviation" => "MIN",
+        "link" => "/api/v1/teams/18"
+      } 
 
-      expect(stat_tracker.team_info("1")).to be_a(Hash)
-      expect(stat_tracker.team_info("1")).to eq(team_info)
+      expect(stat_tracker.team_info("18")).to be_a(Hash)
+      expect(stat_tracker.team_info("18")).to eq(expected)
     end
 
+    it "#all_game_id_win" do
+      expect(stat_tracker.all_game_id_win("3")).to be_a(Array)
+    end
+
+    it "#all_game_id_loss" do
+      expect(stat_tracker.all_game_id_loss("3")).to be_a(Array)
+    end
+
+    it "#goals_win" do
+      expect(stat_tracker.goals_win("3")).to be_a(Array)
+    end
+
+    it "#goals_loss" do
+      expect(stat_tracker.goals_loss("3")).to be_a(Array)
+    end
     it "#games_won_per_team" do 
-    expect(stat_tracker.games_won_per_team).to be_a(Hash)
-  end
+      expect(stat_tracker.games_won_per_team).to be_a(Hash)
+    end
   
     it "#percentage_games_won_by_team_id" do 
       expect(stat_tracker.percentage_games_won_by_team_id).to be_a (Hash)
@@ -280,8 +295,13 @@ RSpec.describe StatTracker do
       expect(stat_tracker.fewest_goals_scored("18")).to eq(0)
     end
 
-    xit "#biggest_team_blowout" do
-      expect(stat_tracker.biggest_team_blowout).to be_a(Integer)
+    it "#biggest_team_blowout" do
+      expect(stat_tracker.biggest_team_blowout("3")).to be_a(Integer)
+    end
+
+    it "#wost_loss" do
+      require 'pry';binding.pry
+      expect(stat_tracker.worst_loss("3")).to be_a(Integer)
     end
   end
 end

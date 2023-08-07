@@ -10,7 +10,6 @@ module LeagueStatable
   
   def total_goals_made_per_team
      @game_teams.each_with_object(Hash.new(0.0)) { |game, goals_made| goals_made[game.team_id] += game.goals}
-   
   end
 
   def games_played_per_team

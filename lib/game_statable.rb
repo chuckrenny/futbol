@@ -15,6 +15,7 @@ module GameStatable
   def calculate_average_by_total_games(total)
     (total / self.total_games).round(2).to_f
   end
+  
   def percentage_home_wins
     home_wins = @game_teams.count { |game| game.result == "WIN" && game.hoa == "home" }
     calculate_average_by_total_games(home_wins)
