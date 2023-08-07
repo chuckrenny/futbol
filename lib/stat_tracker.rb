@@ -31,6 +31,34 @@ include SeasonStatable
     # 1. Iterate
   end
 
+  def games_won_per_team
+    @game_teams.each_with_object(Hash.new(0.0)) do |game, games_won|
+      games_won[game.team_id] += 1 if game.result == "WIN"
+    end
+  end
+
+  def percentage_games_won_by_team_id
+    games_won_per_team.each_with_object(Hash.new(0.0)) do |(key, value), hash|
+      hash[key] = (value / games_played_per_team[key]).round(2)
+    end
+  end
+
+  def average_win_percentage(team_id)
+    percentage_games_won_by_team_id[team_id]
+  end
+
+  def most_goals_scored(team_id)
+    team_goals = []
+    @game_teams.each {|game| team_goals << game.goals if game.team_id == team_id}
+    team_goals.max
+  end
+
+  def fewest_goals_scored(team_id)
+    team_goals = []
+    @game_teams.each {|game| team_goals << game.goals if game.team_id == team_id}
+    team_goals.min
+  end
+
   def self.from_csv(files)
     StatTracker.new(files)
   end
