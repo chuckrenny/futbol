@@ -300,7 +300,6 @@ RSpec.describe StatTracker do
     end
 
     it "#wost_loss" do
-      require 'pry';binding.pry
       expect(stat_tracker.worst_loss("3")).to be_a(Integer)
     end
   end
