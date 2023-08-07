@@ -25,32 +25,41 @@ include SeasonStatable
     end
   end
 
-  def best_season(team_id)
-    # get hash, key - season: game_id
-    # get array of game_id
-    # iterate game_teams
-    # hash, key - season: value [win, games]
-    
-    # Iterate @game_teams to create a hash of {game_id: result}
-    all_game_id = @game_teams.each_with_object({}) do |game, hash|
+  def all_game_id(team_id)
+    @game_teams.each_with_object({}) do |game, hash|
       hash[game.game_id] = game.result if game.team_id == team_id
     end
+  end
 
-    # {season: [win, total]}
+  def best_season(team_id)
     season_result_total = @games.each_with_object(Hash.new([0,0])) do |game, hash|
-        if all_game_id[game.game_id] == "WIN"
+        if all_game_id(team_id)[game.game_id] == "WIN"
           hash[game.season] = [1 + hash[game.season][0], 1+ hash[game.season][1]]
-        elsif all_game_id[game.game_id]
+        elsif all_game_id(team_id)[game.game_id]
           hash[game.season] = [hash[game.season][0], 1+ hash[game.season][1]]
         end
       end
 
-    # {season: [win, total]} -> # {season: %}
     season_result_total_transformed = season_result_total.transform_values do |value|
         (value[0] / value[1].to_f).round(4)
     end
 
-    # output the season key
+    season_result_total_transformed.key(season_result_total_transformed.values.max)
+  end
+
+  def worst_season(team_id)
+    season_result_total = @games.each_with_object(Hash.new([0,0])) do |game, hash|
+        if all_game_id(team_id)[game.game_id] != "WIN"
+          hash[game.season] = [1 + hash[game.season][0], 1+ hash[game.season][1]]
+        elsif all_game_id(team_id)[game.game_id]
+          hash[game.season] = [hash[game.season][0], 1+ hash[game.season][1]]
+        end
+      end
+
+    season_result_total_transformed = season_result_total.transform_values do |value|
+        (value[0] / value[1].to_f).round(4)
+    end
+
     season_result_total_transformed.key(season_result_total_transformed.values.max)
   end
 
