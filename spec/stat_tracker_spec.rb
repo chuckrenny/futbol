@@ -112,8 +112,6 @@ RSpec.describe StatTracker do
     end
 
     it "#total_goals_made_per_team" do
-    
-    # require 'pry';binding.pry
       expect(stat_tracker.total_goals_made_per_team).to be_a(Hash)
     end
 
@@ -246,7 +244,7 @@ RSpec.describe StatTracker do
   end
 
   describe "Team Statistics" do
-    xit "#team_info" do
+    it "#team_info" do
       team_info = {
         team_id: "1",
         franchise_id: "23",
@@ -259,25 +257,27 @@ RSpec.describe StatTracker do
       expect(stat_tracker.team_info("1")).to eq(team_info)
     end
 
-    xit "#games_won_per_team" do 
+    it "#games_won_per_team" do 
     expect(stat_tracker.games_won_per_team).to be_a(Hash)
   end
   
-    xit "#percentage_games_won_by_team_id" do 
+    it "#percentage_games_won_by_team_id" do 
       expect(stat_tracker.percentage_games_won_by_team_id).to be_a (Hash)
     end
 
-    xit "#average_win_percentage" do 
+    it "#average_win_percentage" do 
       expect(stat_tracker.average_win_percentage("1")).to be_a(Float)
       expect(stat_tracker.average_win_percentage("1")).to eq(0.36)
     end
 
-    xit "#most_goals_scored" do 
-      expect(stat_tracker.most_goals_scored).to be_a(Integer)
+    it "#most_goals_scored" do 
+      expect(stat_tracker.most_goals_scored("18")).to be_a(Integer)
+      expect(stat_tracker.most_goals_scored("18")).to eq(7)
     end
 
-    xit "#fewest_goals_scored" do 
-      expect(stat_tracker.fewest_goals_scored).to be_a(Integer)
+    it "#fewest_goals_scored" do 
+      expect(stat_tracker.fewest_goals_scored("18")).to be_a(Integer)
+      expect(stat_tracker.fewest_goals_scored("18")).to eq(0)
     end
 
     xit "#biggest_team_blowout" do
